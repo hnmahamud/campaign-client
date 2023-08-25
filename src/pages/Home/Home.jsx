@@ -8,14 +8,13 @@ const Home = () => {
     <div
       className="hero min-h-screen text-white"
       style={{
-        backgroundImage:
-          "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
+        backgroundImage: "url(https://i.ibb.co/NWxnrK9/campaign.jpg)",
       }}
     >
-      <div className="hero-overlay bg-opacity-70"></div>
+      <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center">
         <div className="max-w-lg">
-          <h1 className="mb-5 text-5xl font-bold">Start Your Campaign</h1>
+          <h1 className="mb-5 text-5xl font-bold">Start a Campaign</h1>
           <p className="mb-5">
             Empower Dreams, Transform Futures: Join the ChangeMakers Initiative
             and Be the Catalyst for Positive Global Change!
