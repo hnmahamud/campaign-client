@@ -1,10 +1,17 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar = () => {
   const { logout, isAuthenticated } = useAuth0();
+  const location = useLocation();
   return (
-    <div className="absolute navbar bg-base-200">
+    <div
+      className={
+        location.pathname === "/my-campaign"
+          ? "navbar bg-base-200"
+          : "absolute navbar bg-base-200"
+      }
+    >
       <div className="w-[80%] mx-auto">
         <div className="navbar bg-base-200">
           <div className="navbar-start">

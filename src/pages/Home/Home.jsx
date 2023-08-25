@@ -18,7 +18,7 @@ const Home = () => {
             and Be the Catalyst for Positive Global Change!
           </p>
           <Link
-            to="/login"
+            to="/my-campaign"
             className="btn btn-outline btn-wide normal-case text-lg text-white"
           >
             Get Started
