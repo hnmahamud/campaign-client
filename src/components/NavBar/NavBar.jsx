@@ -7,7 +7,8 @@ const NavBar = () => {
   return (
     <div
       className={
-        location.pathname === "/my-campaign"
+        location.pathname === "/my-campaign" ||
+        location.pathname === "/add-campaign"
           ? "navbar bg-base-200"
           : "absolute navbar bg-base-200"
       }
@@ -34,27 +35,43 @@ const NavBar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-base"
               >
-                {isAuthenticated && <p className="mb-5">{user.nickname}</p>}
-                <li>
-                  <NavLink to="/">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink to="my-campaign">My Campaign</NavLink>
-                </li>
+                <NavLink
+                  to="/"
+                  className={location.pathname === "/" ? "text-blue-600" : ""}
+                >
+                  Home
+                </NavLink>{" "}
+                <br />
+                <NavLink
+                  to="my-campaign"
+                  className={
+                    location.pathname === "/my-campaign" ? "text-blue-600" : ""
+                  }
+                >
+                  My Campaign
+                </NavLink>
               </ul>
             </div>
             <a className="btn btn-ghost normal-case text-xl">Camp</a>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <NavLink to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="my-campaign">My Campaign</NavLink>
-              </li>
+            <ul className="menu menu-horizontal px-1 space-x-6 text-base">
+              <NavLink
+                to="/"
+                className={location.pathname === "/" ? "text-blue-600" : ""}
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/my-campaign"
+                className={
+                  location.pathname === "/my-campaign" ? "text-blue-600" : ""
+                }
+              >
+                My Campaign
+              </NavLink>
             </ul>
           </div>
           <div className="navbar-end">
