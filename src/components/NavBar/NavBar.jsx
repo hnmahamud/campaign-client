@@ -2,7 +2,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar = () => {
-  const { logout, isAuthenticated } = useAuth0();
+  const { logout, isAuthenticated, user } = useAuth0();
   const location = useLocation();
   return (
     <div
@@ -36,6 +36,7 @@ const NavBar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
+                {isAuthenticated && <p className="mb-5">{user.nickname}</p>}
                 <li>
                   <NavLink to="/">Home</NavLink>
                 </li>
@@ -57,18 +58,21 @@ const NavBar = () => {
             </ul>
           </div>
           <div className="navbar-end">
+            {isAuthenticated && (
+              <p className="hidden md:block mr-5">{user.nickname}</p>
+            )}
             {isAuthenticated ? (
               <button
                 onClick={() =>
                   logout({ logoutParams: { returnTo: window.location.origin } })
                 }
-                className="btn btn-sm btn-outline"
+                className="btn btn-sm btn-outline normal-case"
               >
                 Logout
               </button>
             ) : (
-              <Link to="/login" className="btn btn-sm btn-outline">
-                Login
+              <Link to="/login" className="btn btn-sm btn-outline normal-case">
+                Get Started
               </Link>
             )}
           </div>
