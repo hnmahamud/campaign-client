@@ -1,4 +1,5 @@
 import { FaTrash, FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const CampaignCard = ({ singleCamp, handleDelete }) => {
   const { _id, title, goal, start_date, end_date } = singleCamp;
@@ -19,9 +20,12 @@ const CampaignCard = ({ singleCamp, handleDelete }) => {
           >
             <FaTrash></FaTrash>
           </button>
-          <button className="btn btn-xs btn-outline">
+          <Link
+            to={`/campaign-details/${_id}`}
+            className="btn btn-xs btn-outline"
+          >
             <FaArrowRight></FaArrowRight>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

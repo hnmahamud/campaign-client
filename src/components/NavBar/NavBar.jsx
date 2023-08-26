@@ -8,7 +8,8 @@ const NavBar = () => {
     <div
       className={
         location.pathname === "/my-campaign" ||
-        location.pathname === "/add-campaign"
+        location.pathname === "/add-campaign" ||
+        location.pathname.includes("/campaign-details")
           ? "navbar bg-base-200"
           : "absolute navbar bg-base-200"
       }

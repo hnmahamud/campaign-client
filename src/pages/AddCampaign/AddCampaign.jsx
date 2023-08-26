@@ -21,8 +21,6 @@ const AddCampaign = () => {
       start_date: data?.start_date,
       end_date: data?.end_date,
       content: data?.content,
-      emails: [],
-      prospects: [],
     };
 
     fetch(`${import.meta.env.VITE_SERVER_API}/campaigns`, {
