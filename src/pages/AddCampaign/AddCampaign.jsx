@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddCampaign = () => {
   const { user } = useAuth0();
+  const navigate = useNavigate();
+
   // React hook form
   const { register, handleSubmit, reset } = useForm();
 
@@ -13,10 +16,10 @@ const AddCampaign = () => {
     const newCampaign = {
       user_email: user?.email,
       title: data?.title,
-      goals: data?.goals,
+      goal: data?.goals,
       criteria: data?.criteria,
-      campaign_date: data?.campaign_date,
-      notify_people: data?.notify_people,
+      start_date: data?.start_date,
+      end_date: data?.end_date,
       content: data?.content,
       emails: [],
       prospects: [],
@@ -34,6 +37,7 @@ const AddCampaign = () => {
         if (data.insertedId) {
           reset();
           Swal.fire("Added!", "Campaign has been added.", "success");
+          navigate("/my-campaign", { replace: true });
         }
       })
       .catch((error) => {
@@ -44,9 +48,9 @@ const AddCampaign = () => {
   return (
     <section className="bg-white">
       <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-        <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <h3 className="text-center mb-4 text-2xl font-bold">
           Add a new campaign
-        </h2>
+        </h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div className="sm:col-span-2">
@@ -64,7 +68,7 @@ const AddCampaign = () => {
             </div>
             <div className="w-full">
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Goals
+                Goal
               </label>
               <select
                 {...register("goals")}
@@ -96,7 +100,7 @@ const AddCampaign = () => {
             </div>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Campaign Date
+                Start Date
               </label>
               <div className="relative max-w-sm">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
@@ -111,7 +115,7 @@ const AddCampaign = () => {
                   </svg>
                 </div>
                 <input
-                  {...register("campaign_date")}
+                  {...register("start_date")}
                   type="date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                   placeholder="Select date"
@@ -121,7 +125,7 @@ const AddCampaign = () => {
             </div>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Notify people
+                End Date
               </label>
               <div className="relative max-w-sm">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
@@ -136,7 +140,7 @@ const AddCampaign = () => {
                   </svg>
                 </div>
                 <input
-                  {...register("notify_people")}
+                  {...register("end_date")}
                   type="date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                   placeholder="Select date"

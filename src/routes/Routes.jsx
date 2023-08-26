@@ -5,7 +5,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import MyCampaign from "../pages/MyCampaign/MyCampaign";
 import PrivateRoute from "./PrivateRoute";
-import AddCampaign from "../pages/MyCampaign/AddCampaign";
+import AddCampaign from "../pages/AddCampaign/AddCampaign";
 
 const router = createBrowserRouter([
   {
