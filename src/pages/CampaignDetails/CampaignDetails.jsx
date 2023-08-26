@@ -3,14 +3,17 @@ import axios from "axios";
 import { Link, useLocation, useParams } from "react-router-dom";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { FaPlusCircle, FaMailBulk } from "react-icons/fa";
+import ProspectCard from "./ProspectCard";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const CampaignDetails = () => {
   const { id } = useParams();
+  const { user } = useAuth0();
 
   const location = useLocation();
   const data = { pathname: location.pathname, id };
 
-  const { data: singleCampaign = {}, isLoading } = useQuery({
+  const { data: singleCampaign = {}, isLoading: isCLoading } = useQuery({
     queryKey: ["single-campaign", id],
     queryFn: async () => {
       const response = await axios.get(
@@ -20,7 +23,19 @@ const CampaignDetails = () => {
     },
   });
 
-  if (isLoading) {
+  const { data: prospects = [], isLoading: isPLoading } = useQuery({
+    queryKey: ["prospects", id],
+    queryFn: async () => {
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_API}/prospects?id=${id}&email=${
+          user?.email
+        }`
+      );
+      return response.data;
+    },
+  });
+
+  if (isCLoading || isPLoading) {
     return <LoadingSpinner fullScreen={false}></LoadingSpinner>;
   }
 
@@ -77,7 +92,6 @@ const CampaignDetails = () => {
           {/* head */}
           <thead>
             <tr>
-              <th></th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
@@ -85,13 +99,13 @@ const CampaignDetails = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="hover">
-              <th>1</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-              <td>Purple</td>
-              <td>Purple</td>
-            </tr>
+            {prospects.length > 0 &&
+              prospects.map((singleProspect) => (
+                <ProspectCard
+                  key={singleProspect._id}
+                  singleProspect={singleProspect}
+                ></ProspectCard>
+              ))}
           </tbody>
         </table>
       </div>
