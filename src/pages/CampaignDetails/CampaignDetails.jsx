@@ -135,6 +135,7 @@ const CampaignDetails = () => {
                   key={singleProspect._id}
                   singleProspect={singleProspect}
                   handleDelete={handleDelete}
+                  data={data}
                 ></ProspectCard>
               ))}
           </tbody>
