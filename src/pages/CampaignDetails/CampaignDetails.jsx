@@ -108,13 +108,10 @@ const CampaignDetails = () => {
           Add Prospect
         </Link>
 
-        <Link
-          to="/add-campaign"
-          className="mt-5 btn btn-sm btn-outline normal-case"
-        >
+        <button className="mt-5 btn btn-sm btn-outline normal-case">
           <FaMailBulk></FaMailBulk>
           Send Email
-        </Link>
+        </button>
       </div>
 
       <div className="overflow-x-auto">

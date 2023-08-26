@@ -10,7 +10,8 @@ const NavBar = () => {
         location.pathname === "/my-campaign" ||
         location.pathname === "/add-campaign" ||
         location.pathname.includes("/campaign-details") ||
-        location.pathname === "/add-prospect"
+        location.pathname === "/add-prospect" ||
+        location.pathname.includes("/edit-prospect")
           ? "navbar bg-base-200"
           : "absolute navbar bg-base-200"
       }
