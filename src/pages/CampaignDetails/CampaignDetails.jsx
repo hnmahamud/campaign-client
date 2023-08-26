@@ -5,6 +5,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { FaPlusCircle, FaMailBulk } from "react-icons/fa";
 import ProspectCard from "./ProspectCard";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
 
 const CampaignDetails = () => {
   const { id } = useParams();
@@ -23,7 +24,11 @@ const CampaignDetails = () => {
     },
   });
 
-  const { data: prospects = [], isLoading: isPLoading } = useQuery({
+  const {
+    data: prospects = [],
+    isLoading: isPLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["prospects", id],
     queryFn: async () => {
       const response = await axios.get(
@@ -34,6 +39,31 @@ const CampaignDetails = () => {
       return response.data;
     },
   });
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${import.meta.env.VITE_SERVER_API}/prospects/${id}`)
+          .then((data) => {
+            if (data.data.deletedCount === 1) {
+              refetch();
+              Swal.fire("Deleted!", "Class has been deleted.", "success");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+  };
 
   if (isCLoading || isPLoading) {
     return <LoadingSpinner fullScreen={false}></LoadingSpinner>;
@@ -104,6 +134,7 @@ const CampaignDetails = () => {
                 <ProspectCard
                   key={singleProspect._id}
                   singleProspect={singleProspect}
+                  handleDelete={handleDelete}
                 ></ProspectCard>
               ))}
           </tbody>

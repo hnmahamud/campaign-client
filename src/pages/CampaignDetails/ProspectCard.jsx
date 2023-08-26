@@ -1,7 +1,7 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const ProspectCard = ({ singleProspect }) => {
+const ProspectCard = ({ singleProspect, handleDelete }) => {
   const { _id, first_name, last_name, email } = singleProspect;
   return (
     <tr className="hover">
@@ -10,7 +10,10 @@ const ProspectCard = ({ singleProspect }) => {
       <td>{email}</td>
       <td>
         <div className="flex space-x-2">
-          <button className="btn btn-xs btn-outline">
+          <button
+            onClick={() => handleDelete(_id)}
+            className="btn btn-xs btn-outline"
+          >
             <FaTrash></FaTrash>
           </button>
           <Link
