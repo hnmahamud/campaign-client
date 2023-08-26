@@ -7,6 +7,7 @@ import MyCampaign from "../pages/MyCampaign/MyCampaign";
 import PrivateRoute from "./PrivateRoute";
 import AddCampaign from "../pages/AddCampaign/AddCampaign";
 import CampaignDetails from "../pages/CampaignDetails/CampaignDetails";
+import AddProspect from "../pages/AddProspect/AddProspect";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <CampaignDetails></CampaignDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/add-prospect",
+        element: (
+          <PrivateRoute>
+            <AddProspect></AddProspect>
           </PrivateRoute>
         ),
       },

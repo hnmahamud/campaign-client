@@ -11,8 +11,6 @@ const AddCampaign = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-
     const newCampaign = {
       user_email: user?.email,
       title: data?.title,

@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { FaPlusCircle, FaMailBulk } from "react-icons/fa";
 
 const CampaignDetails = () => {
   const { id } = useParams();
+
+  const location = useLocation();
+  const data = { pathname: location.pathname, id };
 
   const { data: singleCampaign = {}, isLoading } = useQuery({
     queryKey: ["single-campaign", id],
@@ -52,7 +55,8 @@ const CampaignDetails = () => {
 
       <div className="flex justify-between my-5">
         <Link
-          to="/add-campaign"
+          to="/add-prospect"
+          state={data}
           className="mt-5 btn btn-sm btn-outline normal-case"
         >
           <FaPlusCircle></FaPlusCircle>

@@ -9,7 +9,8 @@ const NavBar = () => {
       className={
         location.pathname === "/my-campaign" ||
         location.pathname === "/add-campaign" ||
-        location.pathname.includes("/campaign-details")
+        location.pathname.includes("/campaign-details") ||
+        location.pathname === "/add-prospect"
           ? "navbar bg-base-200"
           : "absolute navbar bg-base-200"
       }
@@ -51,7 +52,7 @@ const NavBar = () => {
                     location.pathname === "/my-campaign" ? "text-blue-600" : ""
                   }
                 >
-                  My Campaign
+                  Campaign
                 </NavLink>
               </ul>
             </div>
@@ -71,7 +72,7 @@ const NavBar = () => {
                   location.pathname === "/my-campaign" ? "text-blue-600" : ""
                 }
               >
-                My Campaign
+                Campaign
               </NavLink>
             </ul>
           </div>
