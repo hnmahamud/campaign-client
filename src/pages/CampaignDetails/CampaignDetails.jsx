@@ -65,21 +65,42 @@ const CampaignDetails = () => {
     });
   };
 
-  const sendEmail = (id) => {
-    axios
-      .get(
-        `${import.meta.env.VITE_SERVER_API}/email-send?id=${id}&userEmail=${
-          user?.email
-        }`
-      )
-      .then((data) => {
-        if (data.data.status === true) {
-          Swal.fire("Sent!", "Email has been sent.", "success");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const sendEmail = async (id) => {
+    const { value: dateTime } = await Swal.fire({
+      title: "Select a Date and Time",
+      html: `
+        <input
+          type="datetime-local"
+          id="datetime"
+          class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-300 focus:border-blue-300"
+        />
+      `,
+      showCancelButton: true,
+      preConfirm: () => {
+        return document.getElementById("datetime").value;
+      },
+    });
+
+    if (dateTime) {
+      axios
+        .get(
+          `${import.meta.env.VITE_SERVER_API}/email-send?id=${id}&userEmail=${
+            user?.email
+          }&schedule=${dateTime}`
+        )
+        .then((data) => {
+          if (data.data.status === true) {
+            Swal.fire({
+              icon: "success",
+              title: "Sent!",
+              html: 'Also check <span class="text-red-500">spam</span> folder.',
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   if (isCLoading || isPLoading) {
@@ -130,7 +151,7 @@ const CampaignDetails = () => {
           className="mt-5 btn btn-sm btn-outline normal-case"
         >
           <FaMailBulk></FaMailBulk>
-          Send Email
+          Schedule Email
         </button>
       </div>
 

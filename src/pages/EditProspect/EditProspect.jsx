@@ -75,7 +75,7 @@ const EditProspect = () => {
                 type="text"
                 name="first_name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                placeholder="Type title"
+                placeholder="Type first name"
                 required
               />
             </div>
@@ -89,7 +89,7 @@ const EditProspect = () => {
                 type="text"
                 name="last_name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                placeholder="Type title"
+                placeholder="Type last name"
                 required
               />
             </div>
@@ -103,7 +103,7 @@ const EditProspect = () => {
                 type="email"
                 name="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                placeholder="Type title"
+                placeholder="Type email"
                 required
               />
             </div>
