@@ -37,9 +37,12 @@ const MyCampaign = () => {
         axios
           .delete(`${import.meta.env.VITE_SERVER_API}/campaigns/${id}`)
           .then((data) => {
-            if (data.data.deletedCount === 1) {
+            if (
+              data.data.campaignResult.deletedCount === 1 &&
+              data.data.prospectResult.deletedCount > 0
+            ) {
               refetch();
-              Swal.fire("Deleted!", "Class has been deleted.", "success");
+              Swal.fire("Deleted!", "Campaign has been deleted.", "success");
             }
           })
           .catch((error) => {
