@@ -1,8 +1,44 @@
-# React + Vite
+## Live Link
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hosted in Netlify -> [https://animated-kleicha-1368eb.netlify.app/](https://animated-kleicha-1368eb.netlify.app/)
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+For install all dependency:
+
+```sh
+npm install
+```
+
+## Create and configure .env.local file
+
+For auth0 authentication need domain and clientId
+
+```sh
+VITE_DOMAIN=..........
+VITE_CLIENTID=..........
+```
+
+For API
+
+```sh
+VITE_SERVER_API=http://localhost:5000
+```
+
+## Run and build
+
+For run the project:
+
+```sh
+npm run dev
+```
+
+For build the project:
+
+```sh
+npm run build
+```
+
+## Server side code link
+
+NodeJS Server -> [https://github.com/hnmahamud/campaign-server](https://github.com/hnmahamud/campaign-server)
