@@ -65,6 +65,23 @@ const CampaignDetails = () => {
     });
   };
 
+  const sendEmail = (id) => {
+    axios
+      .get(
+        `${import.meta.env.VITE_SERVER_API}/email-send?id=${id}&userEmail=${
+          user?.email
+        }`
+      )
+      .then((data) => {
+        if (data.data.status === true) {
+          Swal.fire("Sent!", "Email has been sent.", "success");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   if (isCLoading || isPLoading) {
     return <LoadingSpinner fullScreen={false}></LoadingSpinner>;
   }
@@ -108,7 +125,10 @@ const CampaignDetails = () => {
           Add Prospect
         </Link>
 
-        <button className="mt-5 btn btn-sm btn-outline normal-case">
+        <button
+          onClick={() => sendEmail(id)}
+          className="mt-5 btn btn-sm btn-outline normal-case"
+        >
           <FaMailBulk></FaMailBulk>
           Send Email
         </button>
