@@ -66,40 +66,48 @@ const CampaignDetails = () => {
   };
 
   const sendEmail = async (id) => {
-    const { value: dateTime } = await Swal.fire({
-      title: "Select a Date and Time",
-      html: `
-        <input
-          type="datetime-local"
-          id="datetime"
-          class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-300 focus:border-blue-300"
-        />
-      `,
-      showCancelButton: true,
-      preConfirm: () => {
-        return document.getElementById("datetime").value;
-      },
-    });
+    if (prospects.length > 0) {
+      const { value: dateTime } = await Swal.fire({
+        title: "Select a Date and Time",
+        html: `
+          <input
+            type="datetime-local"
+            id="datetime"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-300 focus:border-blue-300"
+          />
+        `,
+        showCancelButton: true,
+        preConfirm: () => {
+          return document.getElementById("datetime").value;
+        },
+      });
 
-    if (dateTime) {
-      axios
-        .get(
-          `${import.meta.env.VITE_SERVER_API}/email-send?id=${id}&userEmail=${
-            user?.email
-          }&schedule=${dateTime}`
-        )
-        .then((data) => {
-          if (data.data.status === true) {
-            Swal.fire({
-              icon: "success",
-              title: "Sent!",
-              html: 'Also check <span class="text-red-500">spam</span> folder.',
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (dateTime) {
+        axios
+          .post(
+            `${import.meta.env.VITE_SERVER_API}/email-send?id=${id}&userEmail=${
+              user?.email
+            }&schedule=${dateTime}`
+          )
+          .then((data) => {
+            if (data.data.status === true) {
+              Swal.fire({
+                icon: "success",
+                title: "Sent!",
+                html: 'Also check <span class="text-red-500">spam</span> folder.',
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    } else {
+      Swal.fire({
+        icon: "info",
+        title: "Oops!",
+        text: "You need to create prostates first.",
+      });
     }
   };
 

@@ -53,7 +53,7 @@ const NavBar = () => {
                     location.pathname === "/my-campaign" ? "text-blue-600" : ""
                   }
                 >
-                  Campaign
+                  Campaigns
                 </NavLink>
               </ul>
             </div>
@@ -73,7 +73,7 @@ const NavBar = () => {
                   location.pathname === "/my-campaign" ? "text-blue-600" : ""
                 }
               >
-                Campaign
+                Campaigns
               </NavLink>
             </ul>
           </div>
